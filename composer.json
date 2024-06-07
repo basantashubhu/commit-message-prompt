@@ -1,0 +1,21 @@
+{
+    "name" : "basanta/commit-message-prompt",
+    "description": "Generate commit message prompt using git diff for ai chat (chatgpt)",
+    "type": "library",
+    "require": {
+        
+    },
+    "autoload": {
+        "psr-4": {
+            "Basanta\\CommitMessagePrompt\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel" : {
+            "providers": [
+                "Basanta\\CommitMessagePrompt\\CommitMessagePromptServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev"
+}

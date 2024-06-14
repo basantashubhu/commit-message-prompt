@@ -22,9 +22,25 @@ class CommitCommand extends Command
         $output = $process->getOutput();
         file_put_contents(base_path('commit.txt'), "Generate short and precise git commit message according to this diff changes:\n\n $output");
 
-        $openNotepad = new Process(['notepad.exe', base_path('commit.txt')]);
-        $openNotepad->run();
+        if(PHP_OS === 'Linux') {
+            // os: linux
+            $openNotepad = new Process(['xdg-open', base_path('commit.txt')]);
+            $openNotepad->run();
+            unlink(base_path('commit.txt'));
+        } else if(PHP_OS === 'Win') {
+            // os: windows
+            $openNotepad = new Process(['notepad.exe', base_path('commit.txt')]);
+            $openNotepad->run();
+            unlink(base_path('commit.txt'));
+        } elseif(PHP_OS == 'Darwin') {
+            // os: mac
+            $openNotepad = new Process(['open', base_path('commit.txt')]);
+            $openNotepad->run();
+            unlink(base_path('commit.txt'));
+        } else {
+            // os: unknown
+            $this->info("Prompt file: " . base_path('commit.txt'));
+        }
 
-        unlink(base_path('commit.txt'));
     }
 }

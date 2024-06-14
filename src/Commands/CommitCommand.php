@@ -27,12 +27,12 @@ class CommitCommand extends Command
             $openNotepad = new Process(['xdg-open', base_path('commit.txt')]);
             $openNotepad->run();
             unlink(base_path('commit.txt'));
-        } else if(PHP_OS === 'Win') {
+        } else if(strcasecmp(substr(PHP_OS, 0, 3), 'WIN') === 0) {
             // os: windows
             $openNotepad = new Process(['notepad.exe', base_path('commit.txt')]);
             $openNotepad->run();
             unlink(base_path('commit.txt'));
-        } elseif(PHP_OS == 'Darwin') {
+        } elseif(PHP_OS === 'Darwin') {
             // os: mac
             $openNotepad = new Process(['open', base_path('commit.txt')]);
             $openNotepad->run();
